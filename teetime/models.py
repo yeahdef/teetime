@@ -51,10 +51,12 @@ class Category(models.Model):
 
 class Product(models.Model):
   '''
-  a product is a singular item of many to be made via a job
+  a product is a singular physical item (perhaps of many) to be produced via a job
   '''
   price = models.CharField(max_length=255, )
   category = models.ForeignKey(Category)
+  # not assigned to job? inventory.
+  job = models.ForeignKey(Job, blank=True)
   name = models.CharField(max_length=255, )
 
   def __unicode__(self):
@@ -67,6 +69,7 @@ class Feature(models.Model):
   '''
   product = models.ForeignKey(Product)
   name = models.CharField(max_length=255, )
+  attribute = models.CharField(max_length=255, )
 
   def __unicode__(self):
     return '{0}'.format(self.name)
