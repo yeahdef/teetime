@@ -2,6 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+###############
+## CUSTOMERS ##
+###############
+
+
 class Client(models.Model):
   '''
   a client is someone the shop does business with
@@ -39,6 +44,11 @@ class Job(models.Model):
     return '{0}'.format(self.name)
 
 
+##############
+## PRODUCTS ##
+##############
+
+
 class Category(models.Model):
   '''
   a category is a collection of products
@@ -73,3 +83,17 @@ class Feature(models.Model):
 
   def __unicode__(self):
     return '{0}'.format(self.name)
+
+
+###############
+## RESOURCES ##
+###############
+
+
+class Department(models.Model):
+  name = models.CharField(max_length=100)
+
+
+class Employee(models.Model):
+  user = models.OneToOneField(User)
+  department = models.ForeignKey(Department)
