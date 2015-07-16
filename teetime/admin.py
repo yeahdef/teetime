@@ -1,5 +1,5 @@
 from django.contrib import admin
-from extract.models import Product, Category, Feature, Job, Client, State
+from teetime.models import Product, Category, Feature, Job, Client, State
 # Register your models here.
 
 admin.site.register(Product)
