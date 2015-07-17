@@ -58,6 +58,8 @@ class Category(models.Model):
   def __unicode__(self):
     return '{0}'.format(self.name)
 
+  class Meta:
+  	verbose_name_plural = 'Categories'
 
 class Product(models.Model):
   '''
@@ -66,7 +68,7 @@ class Product(models.Model):
   price = models.CharField(max_length=255, )
   category = models.ForeignKey(Category)
   # not assigned to job? inventory.
-  job = models.ForeignKey(Job, blank=True)
+  job = models.ForeignKey(Job, blank=True, null=True)
   name = models.CharField(max_length=255, )
 
   def __unicode__(self):
@@ -93,7 +95,13 @@ class Feature(models.Model):
 class Department(models.Model):
   name = models.CharField(max_length=100)
 
+  def __unicode__(self):
+    return '{0}'.format(self.name)
+
 
 class Employee(models.Model):
   user = models.OneToOneField(User)
   department = models.ForeignKey(Department)
+
+  def __unicode__(self):
+    return '{0}'.format(self.user)
