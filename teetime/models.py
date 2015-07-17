@@ -66,7 +66,7 @@ class Product(models.Model):
   '''
   a product is a singular physical item (perhaps of many) to be produced via a job
   '''
-  price = models.CharField(max_length=255, )
+  price = models.DecimalField(max_length=255, decimal_places=2, max_digits=10)
   category = models.ForeignKey(Category)
   # not assigned to job? inventory.
   job = models.ForeignKey(Job, blank=True, null=True)
