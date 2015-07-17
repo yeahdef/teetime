@@ -19,7 +19,7 @@ class Client(models.Model):
     return '{0}'.format(self.name)
 
 
-class State(models.Model):
+class JobState(models.Model):
   '''
   a state is the status of a job
   '''
@@ -35,10 +35,10 @@ class Job(models.Model):
   '''
   name = models.CharField(max_length=255, )
   open_date = models.DateField(auto_now=True)
-  delivered_date = models.DateField(auto_now=False, blank=True)
+  delivered_date = models.DateField(auto_now=False, blank=True, null=True)
   client = models.ForeignKey(Client)
   description = models.CharField(max_length=255, )
-  status = models.ForeignKey(State)
+  state = models.ForeignKey(JobState)
 
   def __unicode__(self):
     return '{0}'.format(self.name)
@@ -61,6 +61,7 @@ class Category(models.Model):
   class Meta:
   	verbose_name_plural = 'Categories'
 
+
 class Product(models.Model):
   '''
   a product is a singular physical item (perhaps of many) to be produced via a job
@@ -79,7 +80,7 @@ class Feature(models.Model):
   '''
   a feature is an aspect of a product
   '''
-  product = models.ForeignKey(Product)
+  product = models.ForeignKey(Product, blank=True, null=True)
   name = models.CharField(max_length=255, )
   attribute = models.CharField(max_length=255, )
 
@@ -93,6 +94,9 @@ class Feature(models.Model):
 
 
 class Department(models.Model):
+  '''
+  a department is the role of the employee
+  '''
   name = models.CharField(max_length=100)
 
   def __unicode__(self):
@@ -100,6 +104,9 @@ class Department(models.Model):
 
 
 class Employee(models.Model):
+  '''
+  an employee is someone who works for the tshirt shop using this software
+  '''
   user = models.OneToOneField(User)
   department = models.ForeignKey(Department)
 

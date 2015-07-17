@@ -1,5 +1,6 @@
 from django.conf.urls import include, url
 from django.contrib import admin
+admin.site.site_header = 'Tee Time: Pan Ector'
 
 urlpatterns = [
     # Examples:
