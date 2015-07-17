@@ -24,7 +24,7 @@ class Command(BaseCommand):
       if c:
         print 'created: {0}'.format(o)
     # features
-    for i in range(1000):
+    for i in range(100):
       o, c = Feature.objects.get_or_create(
         name=fake.color_name(),
         attribute='Color',
@@ -37,7 +37,7 @@ class Command(BaseCommand):
       if c:
         print 'created: {0}'.format(o)
     # clients
-    for i in range(150):
+    for i in range(50):
       o, c = Client.objects.get_or_create(
         name=fake.company(),
         address=fake.address(),
@@ -46,7 +46,7 @@ class Command(BaseCommand):
       if c:
         print 'created: {0}'.format(o)
     # jobs
-    for i in range(200):
+    for i in range(100):
       o, c = Job.objects.get_or_create(
         name=fake.word(),
         client=Client.objects.all().order_by('?')[0],
@@ -56,7 +56,7 @@ class Command(BaseCommand):
       if c:
         print 'created: {0}'.format(o)
     # products
-    for i in range(200):
+    for i in range(100):
       o, c = Product.objects.get_or_create(
         category=Category.objects.all().order_by('?')[0],
         job=Job.objects.all().order_by('?')[0],
@@ -66,7 +66,7 @@ class Command(BaseCommand):
       if c:
         print 'created: {0}'.format(o)
     # employees
-    for i in range(40):
+    for i in range(30):
       fn = fake.first_name()
       ln = fake.last_name()
       o, c = Employee.objects.get_or_create(
