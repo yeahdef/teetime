@@ -9,4 +9,5 @@ if you have virtualenv installed, you should be able to blurt this into your ter
 	cd teetime
 	pip install -r requirements.txt
 	python manage.py migrate
+	python manage.py pan_faektor
 	python manage.py runserver & sensible-browser http://localhost:8000
