@@ -3,36 +3,51 @@ from teetime.models import Product, Category, Feature, Job, Client, JobState, De
 # Register your models here.
 
 
+class ProductInline(admin.TabularInline):
+    model = Product
+
+
+class JobInline(admin.TabularInline):
+    model = Job
+
+
+class EmployeeInline(admin.TabularInline):
+    model = Employee
+
+
 class ProductAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name', 'category', 'price', 'job', ]
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    pass
-
+    list_display = ['name']
+    inlines = [ProductInline]
 
 class FeatureAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['attribute', 'name']
 
 
 class JobAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name', 'state', 'open_date', 'client']
 
 
 class ClientAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ['name']
+    list_display = ['name', 'address', 'email']
+    inlines = [JobInline]
 
 
 class JobStateAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name']
 
 
 class DepartmentAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['name']
+    inlines = [EmployeeInline]
 
 
 class EmployeeAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['user', 'department']
 
 
 admin.site.register(Product, ProductAdmin)

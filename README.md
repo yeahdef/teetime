@@ -1,6 +1,8 @@
 # teetime
 tee shirt shop CRM
 
+if you have virtualenv installed, you should be able to blurt this into your terminal and get up and running.
+
 	git clone https://github.com/yeahdef/teetime.git
 	virtualenv env
 	source env/bin/activate
