@@ -10,4 +10,5 @@ if you have virtualenv installed, you should be able to blurt this into your ter
 	pip install -r requirements.txt
 	python manage.py migrate
 	python manage.py pan_faektor
-	python manage.py runserver & sensible-browser http://localhost:8000
+	python manage.py createsuperuser
+	python manage.py runserver & sensible-browser http://localhost:8000/admin
