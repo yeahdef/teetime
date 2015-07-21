@@ -1,10 +1,14 @@
 from django.contrib import admin
-from teetime.models import Product, Category, Feature, Job, Client, JobState, Department, Employee
+from teetime.models import Product, Category, Feature, Job, Client, JobState, Department, Employee, Lot
 # Register your models here.
 
 
 class ProductInline(admin.TabularInline):
     model = Product
+
+
+class LotInline(admin.TabularInline):
+    model = Lot
 
 
 class JobInline(admin.TabularInline):
@@ -16,7 +20,7 @@ class EmployeeInline(admin.TabularInline):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'category', 'price', 'job', ]
+    list_display = ['name', 'category', 'price', 'lot', ]
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -29,6 +33,7 @@ class FeatureAdmin(admin.ModelAdmin):
 
 class JobAdmin(admin.ModelAdmin):
     list_display = ['name', 'state', 'open_date', 'client']
+    inlines = [LotInline]
 
 
 class ClientAdmin(admin.ModelAdmin):

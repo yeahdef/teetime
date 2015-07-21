@@ -59,7 +59,18 @@ class Category(models.Model):
     return '{0}'.format(self.name)
 
   class Meta:
-  	verbose_name_plural = 'Categories'
+    verbose_name_plural = 'Categories'
+
+
+class Lot(models.Model):
+  '''
+  a lot is a series of a certain product which is assigned to a job
+  '''
+  quantity = models.IntegerField(default=1)
+  job = models.ForeignKey(Job)
+
+  def __unicode__(self):
+    return '{0}: {1}'.format(self.pk, self.quantity)
 
 
 class Product(models.Model):
@@ -68,9 +79,10 @@ class Product(models.Model):
   '''
   price = models.DecimalField(max_length=255, decimal_places=2, max_digits=10)
   category = models.ForeignKey(Category)
-  # not assigned to job? inventory.
-  job = models.ForeignKey(Job, blank=True, null=True)
   name = models.CharField(max_length=255, )
+  percent_discount = models.IntegerField(default=0)
+  # not assigned to lot? inventory.
+  lot = models.ForeignKey(Lot, blank=True, null=True)
 
   def __unicode__(self):
     return '{0}'.format(self.name)
