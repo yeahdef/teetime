@@ -23,6 +23,10 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ['name', 'category', 'price', 'lot', ]
 
 
+class LotAdmin(admin.ModelAdmin):
+    inlines = [ProductInline]
+
+
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name']
     inlines = [ProductInline]
@@ -32,7 +36,7 @@ class FeatureAdmin(admin.ModelAdmin):
 
 
 class JobAdmin(admin.ModelAdmin):
-    list_display = ['name', 'state', 'open_date', 'client']
+    list_display = ['pk', 'state', 'open_date', 'client']
     inlines = [LotInline]
 
 
@@ -52,13 +56,20 @@ class DepartmentAdmin(admin.ModelAdmin):
 
 
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ['user', 'department']
+    def user_first_name(obj):
+        return obj.user.first_name
+
+    def user_last_name(obj):
+        return obj.user.last_name
+
+    list_display = ['user', user_first_name, user_last_name, 'department']
 
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Feature, FeatureAdmin)
 admin.site.register(Job, JobAdmin)
+admin.site.register(Lot, LotAdmin)
 admin.site.register(Client, ClientAdmin)
 admin.site.register(JobState, JobStateAdmin)
 admin.site.register(Department, DepartmentAdmin)

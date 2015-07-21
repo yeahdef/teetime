@@ -1,4 +1,4 @@
-from teetime.models import Product, Category, Feature, Job, Client, JobState, Department, Employee
+from teetime.models import Product, Category, Feature, Job, Client, JobState, Department, Employee, Lot
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 import datetime
@@ -48,7 +48,6 @@ class Command(BaseCommand):
     # jobs
     for i in range(100):
       o, c = Job.objects.get_or_create(
-        name=fake.word(),
         client=Client.objects.all().order_by('?')[0],
         description=fake.sentences(nb=3),
         state=JobState.objects.all().order_by('?')[0],
@@ -59,7 +58,6 @@ class Command(BaseCommand):
     for i in range(100):
       o, c = Product.objects.get_or_create(
         category=Category.objects.all().order_by('?')[0],
-        job=Job.objects.all().order_by('?')[0],
         price=decimal.Decimal('%d.%d' % (random.randint(0,100),random.randint(0,10))),
         name=fake.word(),
       )

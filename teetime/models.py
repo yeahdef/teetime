@@ -33,7 +33,6 @@ class Job(models.Model):
   '''
   a job is a singular block of work ordered by a client
   '''
-  name = models.CharField(max_length=255, )
   open_date = models.DateField(auto_now=True)
   delivered_date = models.DateField(auto_now=False, blank=True, null=True)
   client = models.ForeignKey(Client)
@@ -41,7 +40,7 @@ class Job(models.Model):
   state = models.ForeignKey(JobState)
 
   def __unicode__(self):
-    return '{0}'.format(self.name)
+    return '{0}'.format(self.pk)
 
 
 ##############
