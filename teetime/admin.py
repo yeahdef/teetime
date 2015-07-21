@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.contrib.auth.models import User
+from django import forms
 from teetime.models import Product, Category, Feature, Job, Client, JobState, Department, Employee, Lot
 # Register your models here.
 
@@ -17,6 +19,11 @@ class JobInline(admin.TabularInline):
 
 class EmployeeInline(admin.TabularInline):
     model = Employee
+    can_delete = False
+
+
+class UserInline(admin.TabularInline):
+    model = User
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -50,19 +57,8 @@ class JobStateAdmin(admin.ModelAdmin):
     list_display = ['name']
 
 
-class DepartmentAdmin(admin.ModelAdmin):
-    list_display = ['name']
+class UserAdmin(admin.ModelAdmin):
     inlines = [EmployeeInline]
-
-
-class EmployeeAdmin(admin.ModelAdmin):
-    def user_first_name(obj):
-        return obj.user.first_name
-
-    def user_last_name(obj):
-        return obj.user.last_name
-
-    list_display = ['user', user_first_name, user_last_name, 'department']
 
 
 admin.site.register(Product, ProductAdmin)
@@ -71,6 +67,5 @@ admin.site.register(Feature, FeatureAdmin)
 admin.site.register(Job, JobAdmin)
 admin.site.register(Lot, LotAdmin)
 admin.site.register(Client, ClientAdmin)
-admin.site.register(JobState, JobStateAdmin)
-admin.site.register(Department, DepartmentAdmin)
-admin.site.register(Employee, EmployeeAdmin)
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)

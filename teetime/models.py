@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
 ###############
 ## CUSTOMERS ##
 ###############
@@ -116,10 +115,10 @@ class Department(models.Model):
 
 class Employee(models.Model):
   '''
-  an employee is someone who works for the tshirt shop using this software
+  an employee is someone who works for the tshirt shop. a user of this software
   '''
-  user = models.OneToOneField(User)
   department = models.ForeignKey(Department)
+  user = models.OneToOneField(User)
 
   def __unicode__(self):
     return '{0}'.format(self.user)
